@@ -1,0 +1,75 @@
+name: Kaggle render controller
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Submit uses a pre-uploaded private dataset; retrieval requires a completed version
+        type: choice
+        options: [submit, status, retrieve]
+        required: true
+      kernel:
+        description: Kaggle owner/kernel-slug (append /version for status or retrieval)
+        required: true
+      dataset:
+        description: Kaggle owner/dataset-slug containing render-bundle.zip (submit only)
+        required: false
+      accelerator:
+        description: Account-authorized GPU accelerator identifier
+        default: NvidiaTeslaT4
+        required: false
+permissions:
+  contents: read
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_CONFIG_DIR: ${{ runner.temp }}/kaggle-config
+      STUDIO_KERNEL: ${{ inputs.kernel }}
+      STUDIO_DATASET: ${{ inputs.dataset }}
+      STUDIO_ACCELERATOR: ${{ inputs.accelerator }}
+      STUDIO_OPERATION: ${{ inputs.operation }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r kaggle/requirements.txt
+      - name: Invoke supported Kaggle interface
+        shell: python
+        run: |
+          import json, os, pathlib, re, shutil, subprocess
+          if not os.environ.get('KAGGLE_API_TOKEN'):
+              raise SystemExit('Add repository Actions secret KAGGLE_API_TOKEN in GitHub settings.')
+          kernel = os.environ['STUDIO_KERNEL']
+          if not re.fullmatch(r'[A-Za-z0-9_-]+/[A-Za-z0-9_-]+(?:/[0-9]+)?', kernel):
+              raise SystemExit('Expected owner/slug or owner/slug/version')
+          operation = os.environ['STUDIO_OPERATION']
+          if operation == 'submit':
+              if kernel.count('/') != 1:
+                  raise SystemExit('Submit accepts owner/slug, without version')
+              dataset = os.environ['STUDIO_DATASET']
+              if not re.fullmatch(r'[A-Za-z0-9_-]+/[A-Za-z0-9_-]+', dataset):
+                  raise SystemExit('Set a private dataset owner/slug containing render-bundle.zip')
+              stage = pathlib.Path('artifacts/kernel')
+              stage.mkdir(parents=True)
+              metadata = json.loads(pathlib.Path('kaggle/kernel-metadata.json').read_text())
+              metadata.update(id=kernel, title=kernel.split('/')[1].replace('-', ' ').title(), dataset_sources=[dataset])
+              (stage / 'kernel-metadata.json').write_text(json.dumps(metadata, indent=2))
+              shutil.copy2('kaggle/render_notebook.ipynb', stage)
+              subprocess.run(['kaggle', 'kernels', 'push', '-p', str(stage), '--accelerator', os.environ['STUDIO_ACCELERATOR'], '--timeout', '3600'], check=True)
+          elif operation == 'status':
+              subprocess.run(['kaggle', 'kernels', 'status', kernel], check=True)
+          elif operation == 'retrieve':
+              if kernel.count('/') != 2:
+                  raise SystemExit('Pin owner/slug/version to retrieve the intended job output')
+              subprocess.run(['kaggle', 'kernels', 'output', kernel, '-p', 'artifacts/kaggle-output'], check=True)
+          else:
+              raise SystemExit('Unsupported operation')
+      - uses: actions/upload-artifact@v4
+        if: ${{ inputs.operation == 'retrieve' }}
+        with:
+          name: kaggle-render-output
+          path: artifacts/kaggle-output
+          if-no-files-found: error

@@ -1,0 +1,27 @@
+{
+  "runtime": "official bpy headless Python runtime",
+  "version": "5.2.3 LTS",
+  "python": "3.13.5",
+  "standalone_system_blender": "4.3.2",
+  "install_path": "/workspace/tools/blender-5.2.3",
+  "source": "https://pypi.org/project/bpy/5.2.3/",
+  "wheel": "bpy-5.2.3-cp313-cp313-manylinux_2_28_x86_64.whl",
+  "wheel_sha256": "8ef4a335930d647233c661ae21be1abf81207af33e1440fc5a4fc2f2f2d44db7",
+  "hash_pinned_dependencies": true,
+  "checks": {
+    "version": true,
+    "cycles_cpu_16px": true,
+    "oidn_compiled": true,
+    "new_scene_build_and_glb_export": true,
+    "legacy_scene_cpu_render_480x270_16samples": true,
+    "legacy_scene_render_visually_inspected": true,
+    "old_blender_builder_compatibility": true,
+    "python_error_exit_status": 9
+  },
+  "gpu_render_verified": false,
+  "limitations": [
+    "Headless bpy does not provide a desktop executable or main event loop for MCP addon",
+    "Full desktop binary upgrade needs official download host access",
+    "New version .blend files kept separate from original4.3 files"
+  ]
+}

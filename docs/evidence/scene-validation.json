@@ -1,0 +1,34 @@
+{
+  "status": "passed_basic_checks",
+  "blender": "4.3.2",
+  "scene": "Scene",
+  "frames": [
+    1,
+    144
+  ],
+  "fps": 24,
+  "camera": "Cinematic market dolly",
+  "objects": 413,
+  "meshes": 388,
+  "armatures": [
+    {
+      "name": "Milo the courier \u2014 rig",
+      "bones": 8,
+      "deform_bones": 8
+    }
+  ],
+  "animated_objects": [
+    "Milo the courier \u2014 rig",
+    "Friendly illuminated eye",
+    "Friendly illuminated eye.001",
+    "Cinematic market dolly"
+  ],
+  "errors": [],
+  "warnings": [],
+  "not_checked": [
+    "Foot sliding, collisions and cloth simulation",
+    "Natural motion, facial quality and lip synchronization",
+    "Camera obstruction and shot continuity",
+    "Asset licensing and professional production quality"
+  ]
+}

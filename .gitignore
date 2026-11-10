@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+dist/
+artifacts/
+*.blend
+*.blend1
+*.exr
+.env
+kaggle.json
+.pytest_cache/
+!configs/kaggle.json

@@ -1,0 +1,18 @@
+{
+  "blender": "4.3.2",
+  "actual_gpu_render_passed": false,
+  "attempts": [
+    {
+      "backend": "OPTIX",
+      "actual_gpu_render_passed": false,
+      "error": "No supported Cycles GPU; CPU fallback is disabled. [{\"backend\": \"OPTIX\", \"error\": \"bpy_struct: item.attr = val: enum \\\"OPTIX\\\" not found in ('NONE', 'CUDA', 'HIP')\"}]"
+    },
+    {
+      "backend": "CUDA",
+      "actual_gpu_render_passed": false,
+      "error": "No supported Cycles GPU; CPU fallback is disabled. [{\"backend\": \"CUDA\", \"devices\": [{\"name\": \"AMD EPYC 9V74 80-Core Processor\", \"type\": \"CPU\", \"enabled\": false}]}]"
+    }
+  ],
+  "error": "No Cycles GPU backend passed an actual render; CPU fallback is disabled",
+  "elapsed_seconds": 0.098
+}

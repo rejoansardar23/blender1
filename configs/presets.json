@@ -1,0 +1,6 @@
+{
+  "preview": {"resolution": [480, 270], "samples": 8},
+  "draft": {"resolution": [960, 540], "samples": 32},
+  "high_quality": {"resolution": [1920, 1080], "samples": 128},
+  "cinematic": {"resolution": [3840, 2160], "samples": 512}
+}

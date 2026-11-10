@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Blender's official bpy runtime; intentionally headless, not a desktop binary.
+set -euo pipefail
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+STUDIO_BLENDER_PYTHON="${STUDIO_BLENDER_PYTHON:-/workspace/tools/blender-5.2.3/bin/python}"
+if [[ ! -x "$STUDIO_BLENDER_PYTHON" ]]; then
+  echo 'Run scripts/install_blender_runtime.sh to install Blender 5.2.3 headless.' >&2
+  exit 1
+fi
+STUDIO_BLENDER_USER="${STUDIO_BLENDER_USER:-/workspace/tools/blender-5.2.3-user}"
+mkdir -p "$STUDIO_BLENDER_USER/config" "$STUDIO_BLENDER_USER/scripts" "$STUDIO_BLENDER_USER/extensions"
+export BLENDER_USER_CONFIG="$STUDIO_BLENDER_USER/config"
+export BLENDER_USER_SCRIPTS="$STUDIO_BLENDER_USER/scripts"
+export BLENDER_USER_EXTENSIONS="$STUDIO_BLENDER_USER/extensions"
+exec "$STUDIO_BLENDER_PYTHON" "$SCRIPT_DIR/blender_runtime.py" "$@"

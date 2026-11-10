@@ -1,0 +1,22 @@
+{
+  "server": {
+    "name": "MCP for Blender",
+    "title": null,
+    "version": "1.30.0",
+    "websiteUrl": null,
+    "icons": null
+  },
+  "tools": [
+    "get_addon_status",
+    "disable_telemetry",
+    "get_scene_info",
+    "execute_blender_code",
+    "record_trajectory_feedback",
+    "look",
+    "generate_3d",
+    "search_assets",
+    "import_asset"
+  ],
+  "get_scene_info_passed": true,
+  "scene_result": "Scene 'Scene' | 1 armature, 1 camera, 23 light, 388 mesh | active Cinematic market dolly | selected Cinematic market dolly | mode OBJECT\n\nShowing 3 of 374 (name | type | location | size | hidden | children):\nFloating diorama foundation | mesh | at (0.0, 1.1, -0.28) | size 13.0x10.4x0.48\nAsphalt street | mesh | at (0.0, -1.2, -0.02) | size 12.8x5.7x0.12\nRaised market pavement | mesh | at (0.0, 3.2, 0.07) | size 12.8x4.3x0.3\n... 371 more. Narrow with query= or root=, or raise limit."
+}

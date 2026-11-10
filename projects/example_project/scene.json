@@ -1,0 +1,17 @@
+{
+  "title": "Chai at Blue Hour",
+  "description": "An original stylized courier robot pauses for chai in a lantern-lit Indian market. Six seconds of scene and animation proof of concept; not a production human character or a finished movie.",
+  "fps": 24,
+  "frame_start": 1,
+  "frame_end": 144,
+  "resolution": [1920, 1080],
+  "seed": 23,
+  "assets": [],
+  "shots": [
+    {"name": "market_arrival", "start": 1, "end": 56, "action": "Courier rolls into the chai market, looking toward the stall.", "camera": "Wide establishing shot moving smoothly inward."},
+    {"name": "greeting", "start": 57, "end": 116, "action": "Courier raises its right hand and waves; head and antenna react with overlapping motion.", "camera": "Continuous three-quarter dolly toward the character."},
+    {"name": "settle", "start": 117, "end": 144, "action": "Hand settles and the courier turns toward the viewer.", "camera": "Hold on the welcoming market."}
+  ],
+  "dialogue": [],
+  "quality": "stylized proof of concept"
+}

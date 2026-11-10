@@ -1,0 +1,17 @@
+{
+  "job_id": "chai-market-preview",
+  "engine": "CYCLES",
+  "device": "CPU",
+  "backend": "AUTO",
+  "resolution": [
+    480,
+    270
+  ],
+  "samples": 16,
+  "frame_start": 1,
+  "frame_end": 144,
+  "fps": 24,
+  "format": "PNG",
+  "threads": 4,
+  "resume": true
+}
